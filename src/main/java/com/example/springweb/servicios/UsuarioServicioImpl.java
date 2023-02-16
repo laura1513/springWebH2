@@ -16,9 +16,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public List<Usuario> findAllUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarioRepositorio.findAll().forEach(usuarios :: add);
-        return usuarios;
+        return usuarioRepositorio.findAll();
     }
 
     @Override
@@ -27,17 +25,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario createUsuario() {
-        return null;
+    public Usuario createUsuario(Usuario usuario) {
+        return usuarioRepositorio.save(usuario);
     }
 
     @Override
-    public Usuario updateUsuario(int id) {
-        return null;
+    public Usuario updateUsuario(Usuario usuario) {
+        return usuarioRepositorio.save(usuario);
     }
 
     @Override
     public void deleteUsuario(int id) {
-
+        usuarioRepositorio.deleteById(id);
     }
 }

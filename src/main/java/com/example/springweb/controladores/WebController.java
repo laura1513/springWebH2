@@ -20,4 +20,47 @@ public class WebController {
         model.addAttribute("usuarios", usuarios);
         return "index";
     }
+
+    @RequestMapping(value ="/usuarios")
+    public String index(Model model) {
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/usuarios/nuevo")
+    public String nuevoUser(Model model) {
+        Usuario usuario = new Usuario();
+        model.addAttribute("usuario", usuario);
+        return "createUser";
+    }
+
+    @PostMapping(value = "/usuarios")
+    public String guardarUser(@ModelAttribute("usuario") Usuario usuario) {
+        usuarioServicio.createUsuario(usuario);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping(value = "/usuarios/{id}")
+    public String updateUser(@PathVariable int id, Model model) {
+        Usuario usuario = usuarioServicio.findUsuario(id);
+        model.addAttribute("usuario", usuario);
+        return "updateUser";
+    }
+
+    @PostMapping(value = "/usuarios/{id}")
+    public String actualizarUser(@PathVariable int id, @ModelAttribute("usuario") Usuario usuario) {
+        Usuario exist = usuarioServicio.findUsuario(id);
+
+        exist.setId((long) id);
+        exist.setNombre(usuario.getNombre());
+        exist.setPassword(usuario.getPassword());
+
+        usuarioServicio.updateUsuario(exist);
+        return "redirect:/usuarios";
+    }
+
+    @RequestMapping(value ="/usuarios/delete/{id}")
+    public String deleteUser(@PathVariable int id, Model model) {
+        usuarioServicio.deleteUsuario(id);
+        return "redirect:/usuarios";
+    }
 }
