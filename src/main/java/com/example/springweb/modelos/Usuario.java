@@ -3,20 +3,22 @@ package com.example.springweb.modelos;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 
 @Data
-@Table(name = "usuarios")
+@Entity
+@Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "name")
+    @Column(name = "user_id")
+    private long id;
+    @Column(name = "username")
     private String nombre;
     @Column(name = "password")
     private String password;
+
 }
