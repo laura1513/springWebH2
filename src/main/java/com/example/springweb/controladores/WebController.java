@@ -14,16 +14,11 @@ public class WebController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @RequestMapping(value ="/")
+    @RequestMapping(value ="/usuarios")
     public String findAll(Model model) {
         List<Usuario> usuarios = usuarioServicio.findAllUsuarios();
         model.addAttribute("usuarios", usuarios);
         return "index";
-    }
-
-    @RequestMapping(value ="/usuarios")
-    public String index(Model model) {
-        return "redirect:/";
     }
 
     @GetMapping(value = "/usuarios/nuevo")
